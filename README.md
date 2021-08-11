@@ -1,6 +1,6 @@
 # U0 - Nivelamento - Exercícios
 
-Lista de exercícios da Unidade 0 - Nivelamento. Teste 01 TESTE DE PUSH
+Lista de exercícios da Unidade 0 - Nivelamento. Teste 01
 
 ## Exercícios
 
