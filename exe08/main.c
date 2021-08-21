@@ -1,8 +1,17 @@
 #include <stdio.h>
 
 int main() {
-   int n1, n2;
-   scanf("%i %i", &n1, &n2);
-   printf("SOMA = %i\n", n1+n2);
+   
+   int n;
+
+   scanf(" %d", &n);
+   while(n!=0){
+      if(n > 0)
+         printf("POSITIVO\n");
+      else
+         printf("NEGATIVO\n");
+      scanf(" %d", &n);
+   }
+   
    return 0;
 }
