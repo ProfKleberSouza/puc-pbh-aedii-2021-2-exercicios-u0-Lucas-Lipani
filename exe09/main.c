@@ -9,14 +9,13 @@ typedef struct diario{
 
 int main() {
    int n;
-   printf("Quantos?\n");
-   scanf(" %d", &n);
+   scanf("%d", &n);
    diario aluno[n];
 
    // loop responsável de preencher os alunos
    for (int i = 0; i < n; i++){
-      fgets(aluno[i].nome,100,stdin);
-      scanf(" %f", &aluno[i].nota);
+      scanf("%s", aluno[i].nome);
+      scanf("%f", &aluno[i].nota);
    }
 
    // loop responsável de calcular a média dos alunos cadastrados
@@ -25,26 +24,50 @@ int main() {
    for (int i = 0; i < n; i++)
       media += aluno[i].nota;
    
-
+   // calcula a media
    media = media/n;
 
-   // loop responsável de selecionar as 3 maiores notas
-/*
-   for (int i = 0; i < n; i++){
-      if (aluno[i].nota > aluno[0].nota){
-         aluno[2].nome = aluno[1].nome;
-         aluno[2].nota = aluno[1].nota;
-         aluno[1].nome = aluno[0].nome;
-         aluno[1].nota = aluno[0].nota;
-         aluno[0].nome = aluno[i].nome;
-         aluno[0].nota = aluno[i].nota;
+   // coloca os alunos em ordem decrescente me relação a nota
+
+   char nome_aux[100];
+   float nota_aux;
+
+   for(int i = 0; i < n; i++){
+      for (int j = i + 1; j < n; j++){
+         if(aluno[i].nota < aluno[j].nota){
+            strcpy(nome_aux,aluno[i].nome);
+            strcpy(aluno[i].nome,aluno[j].nome);
+            strcpy(aluno[j].nome,nome_aux);
+            nota_aux = aluno[i].nota;
+            aluno[i].nota = aluno [j].nota;
+            aluno[j].nota = nota_aux;
+         }
       }
    }
-   */
-   for (int i = 0; i < n; i++){
-      printf("Nome: %s --- Nota: %f\n", aluno[i].nome, aluno[i].nota);
+
+
+   //apos realocado as maiores notas, o próximo loop organiza as 3 primeiras notas por ordem alfabética
+
+   
+   for(int i = 0; i < 2; i++){
+      for (int j = i + 1; j < 3; j++){
+         if(strcmp(aluno[i].nome,aluno[j].nome) > 0){
+            strcpy(nome_aux,aluno[i].nome);
+            strcpy(aluno[i].nome,aluno[j].nome);
+            strcpy(aluno[j].nome,nome_aux);
+            nota_aux = aluno[i].nota;
+            aluno[i].nota = aluno [j].nota;
+            aluno[j].nota = nota_aux;
+            }
+      }
    }
-   //printf("NOTA MEDIA = %.1f\n%s %.1f\n%s %.1f\n%s %.1f\n", media, aluno[0].nome, aluno[0].nota, aluno[1].nome, aluno[1].nota, aluno[2].nome, aluno[2].nota);
+   
+
+   // saída na tela
+   printf("NOTA MEDIA = %.1f\n", media);
+   
+   for (int i = 0; i < 3; i++)
+      printf("%s %.1f\n",aluno[i].nome, aluno[i].nota);
 
    return 0;
 }
